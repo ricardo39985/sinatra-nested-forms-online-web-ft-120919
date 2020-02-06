@@ -6,18 +6,21 @@ module FormsLab
 
     # code other routes/actions here
     get '/' do
-      erb :'pirates/new'
-      
+      erb :root
     end
 
-    post '/show' do
+    post '/pirates' do
       @pirate = Pirate.new(params[:pirate])
-      @ships = nil
-      ship.each do |hash|
-        @ships << Ship.new(hash)        
-      end
-      binding.pry 
+      @ships = []
+      params[:pirate][:ships].each do |hash|
 
+        @ships << Ship.new(hash) 
+      end
+      erb :'pirates/show'
+    end
+
+    get '/new' do
+      erb :'pirates/new'
     end
 
   end
